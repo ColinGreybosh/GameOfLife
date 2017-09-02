@@ -27,16 +27,6 @@ Window::~Window()
     close();
 }
 
-int Window::getWindowHeight()
-{
-    return windowHeight;
-}
-
-int Window::getWindowWidth()
-{
-    return windowWidth;
-}
-
 bool Window::wasEventTriggered(SDL_EventType eventType)
 {
     SDL_Event event;
@@ -61,7 +51,7 @@ void Window::render2DBoolVector(const std::vector<std::vector<bool>> &boolVector
             // Renderer fills a black rectangle if the cell is alive
             if (boolVector[x][y])
             {
-                SDL_Rect cell{ x, y, 1, 1 };
+                SDL_Rect cell{x, y, 1, 1};
                 SDL_RenderFillRect(renderer, &cell);
             }
         }
@@ -73,11 +63,11 @@ bool Window::init()
 {
     bool success = true;
 
-    std::cout << "Initializing SDL...\n";
+    //std::cout << "Initializing SDL...\n";
     if (SDL_Init(SDL_INIT_EVENTS) == 0)
     {
-        std::cout << "SDL initialized...\n";
-        std::cout << "Creating window...\n";
+        //std::cout << "SDL initialized...\n";
+        //std::cout << "Creating window...\n";
 
         window = SDL_CreateWindow(worldTitle, 
                                   SDL_WINDOWPOS_UNDEFINED, 
@@ -87,31 +77,31 @@ bool Window::init()
                                   SDL_WINDOW_SHOWN);
         if (window)
         {
-            std::cout << "Window created...\n";
+            //std::cout << "Window created...\n";
         }
         else
         {
-            std::cout << "Window could not be created. SDL Error: " << SDL_GetError() << std::endl;
+            //std::cout << "Window could not be created. SDL Error: " << SDL_GetError() << std::endl;
             success = false;
         }
 
-        std::cout << "Creating renderer...\n";
+        //std::cout << "Creating renderer...\n";
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer)
         {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            std::cout << "Renderer created...\n";
+            //std::cout << "Renderer created...\n";
         }
         else
         {
-            std::cout << "Renderer could not be created. SDL Error: " << SDL_GetError() << std::endl;
+            //std::cout << "Renderer could not be created. SDL Error: " << SDL_GetError() << std::endl;
             success = false;
         }
     }
     else
     {
-        std::cout << "SDL could not initialize. SDL Error: " << SDL_GetError() << std::endl;
+        //std::cout << "SDL could not initialize. SDL Error: " << SDL_GetError() << std::endl;
         success = false;
     }
 
@@ -121,14 +111,16 @@ bool Window::init()
 void Window::close()
 {
     SDL_DestroyWindow(window);
-    if (window == NULL)
-    {
-        std::cout << "Window destroyed...";
-    }
     SDL_DestroyRenderer(renderer);
-    if (renderer == NULL)
-    {
-        std::cout << "Renderer destroyed...";
-    }
     SDL_Quit();
+}
+
+int Window::getWindowHeight()
+{
+    return windowHeight;
+}
+
+int Window::getWindowWidth()
+{
+    return windowWidth;
 }

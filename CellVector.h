@@ -120,21 +120,17 @@ class CellVector
 public:
     CellVector(int width, int height);
 
-    // Generates the starting conditions for the cell vector based on the chosen seed
     void generateSeed(Seed seed);
     void generateSeed(Seed seed, double isAliveChance);
-    // Updates the boolean values of each cell based on the rules for Conway's Game of Life
     void tick();
-    // Returns the height of the cell vector
-    int getHeight();
-    // Returns the width of the cell vector
-    int getWidth();
+    int getVectorWidth();
+    int getVectorHeight();
     // Returns the cell vector
     std::vector<std::vector<bool>> getCellVector();
 
 private:
-    int height;
     int width;
+    int height;
     std::vector<std::vector<bool>> cellVector;
 
     // Returns a pseudo-random boolean to determine if a current cell is alive or dead when the seed is generated

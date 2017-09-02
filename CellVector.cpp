@@ -8,7 +8,7 @@ CellVector::CellVector(int width, int height)
 {
     this->width = width;
     this->height = height;
-    cellVector.resize(getWidth(), std::vector<bool>(getHeight(), 0));
+    cellVector.resize(getVectorWidth(), std::vector<bool>(getVectorHeight(), 0));
 }
 
 void CellVector::generateSeed(Seed seed)
@@ -143,28 +143,6 @@ void CellVector::tick()
     cellVector.swap(vectorCopy);
 }
 
-int CellVector::getHeight()
-{
-    return height;
-}
-
-int CellVector::getWidth()
-{
-    return width;
-}
-
-std::vector<std::vector<bool>> CellVector::getCellVector()
-{
-    return cellVector;
-}
-
-bool CellVector::getRandomIsAliveBool(double isAliveChance)
-{
-    double chance = static_cast <float> (rand() / static_cast <float> (RAND_MAX));
-
-    return (isAliveChance >= chance);
-}
-
 int CellVector::getAmountOfNeighbors(int x, int y)
 {
     int neighborCount = 0;
@@ -184,11 +162,33 @@ int CellVector::getAmountOfNeighbors(int x, int y)
         }
     }
 
-    // Deduct 
+    // Deduct 1 from neighborCount if the cell looking for neighbors is alive
     if (cellVector[x][y])
     {
         neighborCount--;
     }
 
     return neighborCount;
+}
+
+int CellVector::getVectorWidth()
+{
+    return width;
+}
+
+int CellVector::getVectorHeight()
+{
+    return height;
+}
+
+std::vector<std::vector<bool>> CellVector::getCellVector()
+{
+    return cellVector;
+}
+
+bool CellVector::getRandomIsAliveBool(double isAliveChance)
+{
+    double chance = static_cast <float> (rand() / static_cast <float> (RAND_MAX));
+
+    return (isAliveChance >= chance);
 }
