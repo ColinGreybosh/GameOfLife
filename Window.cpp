@@ -40,9 +40,9 @@ void Window::render2DBoolVector(std::vector<std::vector<bool>> boolVector)
     int vectorWidth = boolVector.size();
     int vectorHeight = boolVector[0].size();
 
-    for (int x = 0; x < vectorWidth - 1; x++)
+    for (int x = 0; x < vectorWidth; x++)
     {
-        for (int y = 0; y < vectorHeight - 1; y++)
+        for (int y = 0; y < vectorHeight; y++)
         {
             // Renderer draws in black if the cell is alive, white if it is dead
             (boolVector[x][y]) ? SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255) 
