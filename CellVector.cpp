@@ -1,15 +1,13 @@
-#include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <string>
+#include <vector>
 
 #include "CellVector.h"
 
-CellVector::CellVector(int height, int width, double isAliveChance)
+CellVector::CellVector(int width, int height)
 {
-    this->height = height;
     this->width = width;
-    this->isAliveChance = isAliveChance;
+    this->height = height;
     cellVector.resize(getWidth(), std::vector<bool>(getHeight(), 0));
 }
 
@@ -18,18 +16,6 @@ void CellVector::generateSeed(Seed seed)
     // This switch generates either a random seed or a predefined still-life, oscillator, or space-ship pattern
     switch (seed)
     {
-    case RANDOM:
-        srand(static_cast <unsigned> (time(0)));
-
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                cellVector[x][y] = getRandomIsAliveBool();
-            }
-        }
-        break;
-
     case BLOCK:
         cellVector[1][1] = 1;
         cellVector[1][2] = 1;
@@ -119,6 +105,27 @@ void CellVector::generateSeed(Seed seed)
     } 
 }
 
+void CellVector::generateSeed(Seed seed, double isAliveChance)
+{
+    if (seed == RANDOM)
+    {
+        srand(static_cast <unsigned> (time(0)));
+
+        for (int x = 0; x < width; x++)
+        {
+            for (int y = 0; y < height; y++)
+            {
+                cellVector[x][y] = getRandomIsAliveBool(isAliveChance);
+            }
+        }
+    }
+    else
+    {
+        generateSeed(seed);
+    }
+}
+    
+
 void CellVector::tick()
 {
     std::vector<std::vector<bool>> vectorCopy = cellVector;
@@ -128,49 +135,12 @@ void CellVector::tick()
         for (int y = 0; y < width; y++)
         {
             int amountOfNeighbors = getAmountOfNeighbors(x, y);
-            // Alive and has 2 neighbors - Cell Lives
-            if (cellVector[x][y] && amountOfNeighbors == 2)
-            {
-                vectorCopy[x][y] = 1;
-            }
-            // Has 3 neighbors - Cell Lives/Is Born
-            else if (amountOfNeighbors == 3)
-            {
-                vectorCopy[x][y] = 1;
-            }
-            // Neither previous conditions satisfied - Cell Dies
-            else
-            {
-                vectorCopy[x][y] = 0;
-            }
+            // Alive and has 2 neighbors - Cell Lives | Has 3 neighbors - Cell Lives/Is Born | Neither previous conditions satisfied - Cell Dies
+            vectorCopy[x][y] = cellVector[x][y] && amountOfNeighbors == 2 || amountOfNeighbors == 3;
         }
     }
 
     cellVector.swap(vectorCopy);
-}
-
-void CellVector::printVector()
-{
-    std::string output = "";
-
-    for (int x = 0; x < (width - 1); x++)
-    {
-        for (int y = 0; y < (height - 1); y++)
-        {
-            // Prints "0" if alive, "." if dead
-            (cellVector[x][y]) ? output.append("0") : output.append(".");
-            output.append(" ");
-        }
-        output.append("\n");
-    }
-
-    for (int i = 0; i < 10; i++)
-    {
-        output.append("\n");
-    }
-
-    output.append("\n");
-    std::cout << output;
 }
 
 int CellVector::getHeight()
@@ -188,7 +158,7 @@ std::vector<std::vector<bool>> CellVector::getCellVector()
     return cellVector;
 }
 
-bool CellVector::getRandomIsAliveBool()
+bool CellVector::getRandomIsAliveBool(double isAliveChance)
 {
     double chance = static_cast <float> (rand() / static_cast <float> (RAND_MAX));
 

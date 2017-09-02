@@ -8,7 +8,7 @@ class Window
 {
 public:
     Window(int worldHeight, int worldWidth, double windowScale, const char* worldTitle);
-
+    ~Window();
     // Returns the height of the SDL window
     int getWindowHeight();
     // Returns the width of the SDL window
@@ -16,11 +16,7 @@ public:
     // Checks if a certain SDL event was triggered and returns true if so
     bool wasEventTriggered(SDL_EventType eventType);
     // Prints the boolean contents of the 2D-vector argument to the console
-    void render2DBoolVector(std::vector<std::vector<bool>> boolVector);
-    // Initializes SDL, the SDL window, and the SDL renderer
-    bool initSDL();
-    // Deallocates and destroys all SDL variables and windows
-    void closeSDL();
+    void render2DBoolVector(const std::vector<std::vector<bool>> &boolVector);
 
 private:
     int worldHeight, worldWidth, windowHeight, windowWidth;
@@ -28,6 +24,11 @@ private:
     const char* worldTitle;
     SDL_Window* window;
     SDL_Renderer* renderer;
+
+    // Initializes SDL, the SDL window, and the SDL renderer
+    bool init();
+    // Deallocates and destroys all SDL variables and windows
+    void close();
 };
 
-#endif
+#endif //!WINDOW_H

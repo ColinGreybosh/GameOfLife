@@ -118,14 +118,13 @@ enum Seed
 class CellVector
 {
 public:
-    CellVector(int height, int width, double isAliveChance);
+    CellVector(int width, int height);
 
     // Generates the starting conditions for the cell vector based on the chosen seed
     void generateSeed(Seed seed);
+    void generateSeed(Seed seed, double isAliveChance);
     // Updates the boolean values of each cell based on the rules for Conway's Game of Life
     void tick();
-    // Prints the current vector to the console
-    void printVector();
     // Returns the height of the cell vector
     int getHeight();
     // Returns the width of the cell vector
@@ -136,13 +135,12 @@ public:
 private:
     int height;
     int width;
-    double isAliveChance;
     std::vector<std::vector<bool>> cellVector;
 
     // Returns a pseudo-random boolean to determine if a current cell is alive or dead when the seed is generated
-    bool getRandomIsAliveBool(); 
+    bool getRandomIsAliveBool(double isAliveChance); 
     // Returns an integer counting the amount of alive cells adjacent to the given coordinate
     int getAmountOfNeighbors(int x, int y);
 };
 
-#endif
+#endif //!CELLVECTOR_H

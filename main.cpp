@@ -1,48 +1,30 @@
-#include <string>
-
-#include "CellVector.h"
-#include "Window.h"
+#include <SDL.h>
+#include "Game.h"
 
 int main(int argc, char* args[])
 {
     // Configuration Settings //
-    int worldWidth   = 200;
-    int worldHeight  = 200;
-    // Window size as a percentage of the world size. EX: 50x50 world with 2.0 scale = 100x100 window
-    double windowScale = 5;                            
-    // Percentage chance that a specific cell will be alive at world generation if RANDOM is the arg in CellVector.generateseed()
-    double isAliveChance = 0.5;                        
-    // Name of the program window
-    const char* gameTitle = "Conway's Game of Life";   
+    const int worldWidth   = 50;
+    const int worldHeight  = 50;
+    const double windowScale = 10.0; // Window size as a percentage of the world size. Ex: 50x50 world with 2.0 scale = 100x100 window
+    const double isAliveChance = 0.5; // Percentage chance that a specific cell will be alive at world generation if RANDOM is the arg in CellVector.generateseed()  
+    const char* gameTitle = "Conway's Game of Life";
 
-    // Initialize cell vector
-    CellVector cellVector(worldHeight, worldWidth, isAliveChance);
-    // Generate seed for cell vector frpm given seed type
-    cellVector.generateSeed(RANDOM);
+    Game game(worldWidth, worldHeight, windowScale, gameTitle);
+    game.generateSeed(RANDOM, isAliveChance); // Generate seed for cell vector from given seed type
 
-    // Initialize the window class
-    Window window(worldWidth, worldHeight, windowScale, "Conway's Game of Life");
-
-    // Initialize SDL within the window class
-    bool running = window.initSDL();
-
+    bool running = true;
     while (running)
     {
         // Check if the X button on the window was clicked, stop looping if so
-        running = (window.wasEventTriggered(SDL_QUIT)) ? false : true;
-
+        running = !game.wasEventTriggered(SDL_QUIT);
         // Render the cell vector on the SDL window
-        window.render2DBoolVector(cellVector.getCellVector());
-
+        game.render();
         // Calculate one generation of The Game of Life
-        cellVector.tick();
-
+        game.tick();
         // Crude delay system for the moment
-        SDL_Delay(static_cast<Uint32>(1 / 60 * 1e4));
+        game.delay(static_cast<Uint32>(16));
     }
-
-    // Deallocate and destroy all SDL variables and windows
-    window.closeSDL();
 
     return 0;
 }

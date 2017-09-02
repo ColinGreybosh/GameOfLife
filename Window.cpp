@@ -1,16 +1,30 @@
 #include <vector>
 #include <cmath>
+#include <stdexcept>
 
+#include "SDL.h"
 #include "Window.h"
 
 
 Window::Window(int worldHeight, int worldWidth, double windowScale, const char* worldTitle)
 {
     this->worldTitle = worldTitle;
-    this->worldHeight = windowHeight = worldHeight;
     this->worldWidth = windowWidth = worldWidth;
+    this->worldHeight = windowHeight = worldHeight;
     static_cast<int>(ceil(windowHeight *= windowScale));
     static_cast<int>(ceil(windowWidth *= windowScale));
+    // Initialize SDL and throw a runtime error if it fails
+    if (!init())
+    {
+        throw std::runtime_error("SDL could not initialize.");
+        close();
+    }
+    SDL_RenderSetScale(renderer, windowScale, windowScale);
+}
+
+Window::~Window()
+{
+    close();
 }
 
 int Window::getWindowHeight()
@@ -31,44 +45,36 @@ bool Window::wasEventTriggered(SDL_EventType eventType)
     return (eventType == event.type) ? true : false;
 }
 
-void Window::render2DBoolVector(std::vector<std::vector<bool>> boolVector)
+void Window::render2DBoolVector(const std::vector<std::vector<bool>> &boolVector)
 {
-    std::cout << "Rendering cell vector...\n";
-    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255); // Set color to white
     SDL_RenderClear(renderer);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); // Set color to black
 
-    int vectorWidth = boolVector.size();
-    int vectorHeight = boolVector[0].size();
+    const int vectorWidth = boolVector.size();
+    const int vectorHeight = boolVector[0].size();
 
     for (int x = 0; x < vectorWidth; x++)
     {
         for (int y = 0; y < vectorHeight; y++)
         {
-            // Renderer draws in black if the cell is alive, white if it is dead
-            (boolVector[x][y]) ? SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255) 
-                               : SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            SDL_Rect cell;
-
-            cell.x = static_cast<int>(ceil(x * (windowWidth / vectorWidth)));
-            cell.w = static_cast<int>(ceil(windowWidth / vectorWidth));
-
-            cell.y = static_cast<int>(ceil(y * (windowHeight / vectorHeight)));
-            cell.h = static_cast<int>(ceil(windowHeight / vectorHeight));
-
-            SDL_RenderFillRect(renderer, &cell);
+            // Renderer fills a black rectangle if the cell is alive
+            if (boolVector[x][y])
+            {
+                SDL_Rect cell{ x, y, 1, 1 };
+                SDL_RenderFillRect(renderer, &cell);
+            }
         }
     }
-
     SDL_RenderPresent(renderer);
-    std::cout << "Cell vector rendered...\n";
 }
 
-bool Window::initSDL()
+bool Window::init()
 {
     bool success = true;
 
     std::cout << "Initializing SDL...\n";
-    if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
+    if (SDL_Init(SDL_INIT_EVENTS) == 0)
     {
         std::cout << "SDL initialized...\n";
         std::cout << "Creating window...\n";
@@ -112,7 +118,7 @@ bool Window::initSDL()
     return success;
 }
 
-void Window::closeSDL()
+void Window::close()
 {
     SDL_DestroyWindow(window);
     if (window == NULL)
