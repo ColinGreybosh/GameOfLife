@@ -130,9 +130,9 @@ void CellVector::tick()
 {
     std::vector<std::vector<bool>> vectorCopy = cellVector;
 
-    for (int x = 0; x < height; x++)
+    for (int x = 0; x < width; x++)
     {
-        for (int y = 0; y < width; y++)
+        for (int y = 0; y < height; y++)
         {
             int amountOfNeighbors = getAmountOfNeighbors(x, y);
             // Alive and has 2 neighbors - Cell Lives | Has 3 neighbors - Cell Lives/Is Born | Neither previous conditions satisfied - Cell Dies

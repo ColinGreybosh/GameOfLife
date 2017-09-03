@@ -6,13 +6,13 @@
 #include "Window.h"
 
 
-Window::Window(int worldHeight, int worldWidth, double windowScale, const char* worldTitle)
+Window::Window(int worldWidth, int worldHeight, double windowScale, const char* worldTitle)
 {
     this->worldTitle = worldTitle;
     this->worldWidth = windowWidth = worldWidth;
     this->worldHeight = windowHeight = worldHeight;
-    static_cast<int>(ceil(windowHeight *= windowScale));
     static_cast<int>(ceil(windowWidth *= windowScale));
+    static_cast<int>(ceil(windowHeight *= windowScale));
     // Initialize SDL and throw a runtime error if it fails
     if (!init())
     {
@@ -70,11 +70,12 @@ bool Window::init()
         //std::cout << "Creating window...\n";
 
         window = SDL_CreateWindow(worldTitle, 
-                                  SDL_WINDOWPOS_UNDEFINED, 
-                                  SDL_WINDOWPOS_UNDEFINED, 
+                                  SDL_WINDOWPOS_CENTERED, 
+                                  SDL_WINDOWPOS_CENTERED,
                                   windowWidth, 
                                   windowHeight, 
                                   SDL_WINDOW_SHOWN);
+
         if (window)
         {
             //std::cout << "Window created...\n";
