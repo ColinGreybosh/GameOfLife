@@ -2,7 +2,7 @@
 #include <ctime>
 #include <vector>
 
-#include "CellVector.h"
+#include "../include/CellVector.h"
 
 CellVector::CellVector(int width, int height)
 {

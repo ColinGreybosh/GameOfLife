@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 #include "SDL.h"
-#include "Window.h"
+#include "../include/Window.h"
 
 
 Window::Window(int worldWidth, int worldHeight, double windowScale, const char* worldTitle)

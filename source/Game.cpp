@@ -1,6 +1,6 @@
-#include "Game.h"
-#include "CellVector.h"
-#include "Window.h"
+#include "../include/Game.h"
+#include "../include/CellVector.h"
+#include "../include/Window.h"
 
 Game::Game(int worldWidth, int worldHeight, double windowScale, const char* gameTitle) 
     : cellVector(worldWidth, worldHeight), 
