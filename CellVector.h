@@ -6,9 +6,6 @@
 // Contains enum values for the game seeds created by CellVector::generateSeed()
 enum Seed
 {
-    // Randomly generated, user-defined region
-    RANDOM,
-
     /*
     Still Life, 4x4 region, 4 live cells
     ------------------------------------

@@ -100,7 +100,7 @@ void CellVector::generateSeed(Seed seed)
         break;
 
     default:
-        generateSeed(RANDOM);
+        generateSeed(DEBUG);
         break;
     } 
 }
