@@ -16,13 +16,9 @@ int main(int argc, char* args[])
     bool running = true;
     while (running)
     {
-        // Check if the X button on the window was clicked, stop looping if so
         running = !game.wasEventTriggered(SDL_QUIT);
-        // Render the cell vector on the SDL window
         game.render();
-        // Calculate one generation of The Game of Life
         game.tick();
-        // Crude delay system for the moment
         game.delay(static_cast<Uint32>(16));
     }
 
