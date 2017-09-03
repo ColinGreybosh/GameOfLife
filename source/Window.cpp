@@ -1,8 +1,8 @@
 #include <vector>
 #include <cmath>
 #include <stdexcept>
+#include <SDL.h>
 
-#include "SDL.h"
 #include "../include/Window.h"
 
 

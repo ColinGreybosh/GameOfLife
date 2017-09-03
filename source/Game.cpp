@@ -4,10 +4,7 @@
 
 Game::Game(int worldWidth, int worldHeight, double windowScale, const char* gameTitle) 
     : cellVector(worldWidth, worldHeight), 
-      window(worldWidth, worldHeight, windowScale, gameTitle)
-{
-    
-}
+      window(worldWidth, worldHeight, windowScale, gameTitle){}
 
 void Game::generateSeed(Seed seed)
 {
