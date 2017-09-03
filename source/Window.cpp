@@ -1,6 +1,5 @@
 #include <vector>
 #include <cmath>
-#include <stdexcept>
 #include <SDL.h>
 
 #include "../include/Window.h"
@@ -16,7 +15,6 @@ Window::Window(int worldWidth, int worldHeight, double windowScale, const char* 
     // Initialize SDL and throw a runtime error if it fails
     if (!init())
     {
-        throw std::runtime_error("SDL could not initialize.");
         close();
     }
     SDL_RenderSetScale(renderer, windowScale, windowScale);

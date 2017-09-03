@@ -118,7 +118,6 @@ void CellVector::generateSeed(double isAliveChance)
     }
 }
     
-
 void CellVector::tick()
 {
     std::vector<std::vector<bool>> vectorCopy = cellVector;
