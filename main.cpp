@@ -11,7 +11,7 @@ int main(int argc, char* args[])
     const char* gameTitle = "Conway's Game of Life";
 
     Game game(worldWidth, worldHeight, windowScale, gameTitle);
-    game.generateSeed(RANDOM, isAliveChance);
+    game.generateSeed(isAliveChance);
 
     bool running = true;
     while (running)

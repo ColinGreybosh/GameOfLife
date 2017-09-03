@@ -121,7 +121,7 @@ public:
     CellVector(int width, int height);
 
     void generateSeed(Seed seed);
-    void generateSeed(Seed seed, double isAliveChance);
+    void generateSeed(double isAliveChance);
     void tick();
     int getVectorWidth();
     int getVectorHeight();

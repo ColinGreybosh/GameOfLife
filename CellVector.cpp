@@ -105,23 +105,16 @@ void CellVector::generateSeed(Seed seed)
     } 
 }
 
-void CellVector::generateSeed(Seed seed, double isAliveChance)
+void CellVector::generateSeed(double isAliveChance)
 {
-    if (seed == RANDOM)
-    {
-        srand(static_cast <unsigned> (time(0)));
+    srand(static_cast <unsigned> (time(0)));
 
-        for (int x = 0; x < width; x++)
-        {
-            for (int y = 0; y < height; y++)
-            {
-                cellVector[x][y] = getRandomIsAliveBool(isAliveChance);
-            }
-        }
-    }
-    else
+    for (int x = 0; x < width; x++)
     {
-        generateSeed(seed);
+        for (int y = 0; y < height; y++)
+        {
+            cellVector[x][y] = getRandomIsAliveBool(isAliveChance);
+        }
     }
 }
     

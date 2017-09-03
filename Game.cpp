@@ -14,9 +14,9 @@ void Game::generateSeed(Seed seed)
     cellVector.generateSeed(seed);
 }
 
-void Game::generateSeed(Seed seed, double isAliveChance)
+void Game::generateSeed(double isAliveChance)
 {
-    cellVector.generateSeed(seed, isAliveChance);
+    cellVector.generateSeed(isAliveChance);
 }
 
 bool Game::wasEventTriggered(SDL_EventType eventType)
