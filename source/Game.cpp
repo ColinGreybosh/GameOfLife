@@ -1,9 +1,11 @@
 #include "../include/Game.h"
+#include "../include/Config.h"
 #include "../include/CellVector.h"
 #include "../include/Window.h"
 
 Game::Game(int worldWidth, int worldHeight, double windowScale, const char* gameTitle) 
-    : cellVector(worldWidth, worldHeight), 
+    : config("config.ini"),
+      cellVector(worldWidth, worldHeight), 
       window(worldWidth, worldHeight, windowScale, gameTitle){}
 
 void Game::generateSeed(Seed seed)

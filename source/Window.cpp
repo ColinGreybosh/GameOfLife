@@ -61,46 +61,33 @@ bool Window::init()
 {
     bool success = true;
 
-    //std::cout << "Initializing SDL...\n";
     if (SDL_Init(SDL_INIT_EVENTS) == 0)
     {
-        //std::cout << "SDL initialized...\n";
-        //std::cout << "Creating window...\n";
+        window = SDL_CreateWindow(
+            worldTitle, 
+            SDL_WINDOWPOS_CENTERED, 
+            SDL_WINDOWPOS_CENTERED,
+            windowWidth, 
+            windowHeight, 
+            SDL_WINDOW_SHOWN);
 
-        window = SDL_CreateWindow(worldTitle, 
-                                  SDL_WINDOWPOS_CENTERED, 
-                                  SDL_WINDOWPOS_CENTERED,
-                                  windowWidth, 
-                                  windowHeight, 
-                                  SDL_WINDOW_SHOWN);
-
-        if (window)
+        if (!window)
         {
-            //std::cout << "Window created...\n";
-        }
-        else
-        {
-            //std::cout << "Window could not be created. SDL Error: " << SDL_GetError() << std::endl;
             success = false;
         }
-
-        //std::cout << "Creating renderer...\n";
 
         renderer = SDL_CreateRenderer(window, -1, 0);
         if (renderer)
         {
             SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            //std::cout << "Renderer created...\n";
         }
         else
         {
-            //std::cout << "Renderer could not be created. SDL Error: " << SDL_GetError() << std::endl;
             success = false;
         }
     }
     else
     {
-        //std::cout << "SDL could not initialize. SDL Error: " << SDL_GetError() << std::endl;
         success = false;
     }
 

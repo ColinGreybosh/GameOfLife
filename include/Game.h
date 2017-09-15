@@ -3,6 +3,7 @@
 
 #include <SDL.h>
 
+#include "Config.h"
 #include "CellVector.h"
 #include "Window.h"
 
@@ -25,6 +26,7 @@ public:
     void delay(Uint32 msDelay);
 
 private:
+    Config config;
     CellVector cellVector;
     Window window;
 };
