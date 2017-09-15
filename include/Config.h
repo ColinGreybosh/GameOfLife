@@ -4,6 +4,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <regex>
 
 struct mapDataTypes
 {
