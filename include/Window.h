@@ -20,9 +20,7 @@ private:
     SDL_Window* window;
     SDL_Renderer* renderer;
 
-    // Initializes SDL, the SDL window, and the SDL renderer
     bool init();
-    // Deallocates and destroys all SDL variables and windows
     void close();
 
     int getWindowHeight();

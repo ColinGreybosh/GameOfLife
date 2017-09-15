@@ -9,7 +9,7 @@ Config::Config(std::string fileName)
     configFile.open(fileName);
     if (configFile.is_open())
     {
-
+        // TODO: Add config values to map
     }
     else
     {
@@ -28,5 +28,5 @@ Config::~Config()
 
 mapDataTypes Config::getValue(std::string key)
 {
-    
+    // TODO: Retrieve values from map
 }

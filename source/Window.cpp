@@ -12,7 +12,7 @@ Window::Window(int worldWidth, int worldHeight, double windowScale, const char* 
     this->worldHeight = windowHeight = worldHeight;
     static_cast<int>(ceil(windowWidth *= windowScale));
     static_cast<int>(ceil(windowHeight *= windowScale));
-    // Initialize SDL and throw a runtime error if it fails
+
     if (!init())
     {
         close();
