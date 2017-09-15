@@ -21,6 +21,7 @@ public:
     mapDataTypes getValue(std::string key);
 
 private:
+    std::regex configRegex;
     std::ifstream configFile;
     std::map<std::string, mapDataTypes> configOptions;
 };

@@ -1,10 +1,12 @@
 #include <SDL.h>
 #include <string>
 #include <fstream>
+#include <regex>
 
 #include "../include/Config.h"
 
-Config::Config(std::string fileName)
+Config::Config(std::string fileName) :
+    configRegex("/([A-Z])\w+([=])+([0-9]{0,})\d/")
 {
     configFile.open(fileName);
     if (configFile.is_open())
