@@ -5,9 +5,9 @@
 #include "../include/Window.h"
 
 
-Window::Window(int worldWidth, int worldHeight, double windowScale, const char* worldTitle)
+Window::Window(int worldWidth, int worldHeight, double windowScale, const char* gameTitle)
 {
-    this->worldTitle = worldTitle;
+    this->gameTitle = gameTitle;
     this->worldWidth = windowWidth = worldWidth;
     this->worldHeight = windowHeight = worldHeight;
     static_cast<int>(ceil(windowWidth *= windowScale));
@@ -64,7 +64,7 @@ bool Window::init()
     if (SDL_Init(SDL_INIT_EVENTS) == 0)
     {
         window = SDL_CreateWindow(
-            worldTitle, 
+            gameTitle, 
             SDL_WINDOWPOS_CENTERED, 
             SDL_WINDOWPOS_CENTERED,
             windowWidth, 
