@@ -16,14 +16,21 @@ struct mapDataTypes
 class Config
 {
 public:
-    Config(const std::string fileName);
+    Config(const std::string fileName, const std::string regex);
     ~Config();
 
-    mapDataTypes getValue(std::string key);
+    std::string getRegex();
+    std::string getFileName();
+    mapDataTypes getConfigValue(std::string key);
 
 private:
-    std::regex configRegex;
+    std::string fileName;
     std::ifstream configFile;
+
+    std::string regexString;
+    std::regex configRegex;
+    std::smatch regexMatch;
+
     std::map<std::string, mapDataTypes> configOptions;
 };
 

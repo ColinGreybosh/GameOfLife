@@ -4,7 +4,7 @@
 #include "../include/Window.h"
 
 Game::Game(int worldWidth, int worldHeight, double windowScale, const char* gameTitle) 
-    : config("config.ini"),
+    : config("config.ini", "/([A-Z])\\w+([=])+([0-9]{0,})\\d/"),
       cellVector(worldWidth, worldHeight), 
       window(worldWidth, worldHeight, windowScale, gameTitle){}
 

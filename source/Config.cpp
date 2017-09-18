@@ -5,10 +5,14 @@
 
 #include "../include/Config.h"
 
-Config::Config(std::string fileName) :
-    configRegex("/([A-Z])\\w+([=])+([0-9]{0,})\\d/")
+Config::Config(const std::string fileName, const std::string regex) :
+    configRegex(regex)
 {
+    this->fileName = fileName;
+    regexString = regex;
+
     configFile.open(fileName);
+
     if (configFile.is_open())
     {
         // TODO: Add config values to map
@@ -28,7 +32,17 @@ Config::~Config()
     configFile.close();
 }
 
-mapDataTypes Config::getValue(std::string key)
+std::string Config::getRegex()
 {
-    // TODO: Retrieve values from map
+    return regexString;
+}
+
+std::string Config::getFileName()
+{
+    return fileName;
+}
+
+mapDataTypes Config::getConfigValue(std::string key)
+{
+    return configOptions[key];
 }
