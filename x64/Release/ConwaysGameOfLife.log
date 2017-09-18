@@ -1,11 +1,13 @@
 ﻿  Config.cpp
-source\Config.cpp(9): warning C4129: 'w': unrecognized character escape sequence
-source\Config.cpp(9): warning C4129: 'd': unrecognized character escape sequence
   Game.cpp
+  Window.cpp
+source\Window.cpp(13): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+source\Window.cpp(14): warning C4244: '*=': conversion from 'double' to 'int', possible loss of data
+source\Window.cpp(20): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+source\Window.cpp(42): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+source\Window.cpp(42): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
+source\Window.cpp(43): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+source\Window.cpp(43): warning C4267: 'initializing': conversion from 'size_t' to 'const int', possible loss of data
   main.cpp
-  Generating code
-  404 of 805 functions (50.2%) were compiled, the rest were copied from previous compilation.
-    322 functions were new in current compilation
-    60 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  ConwaysGameOfLife.vcxproj -> F:\Files\Documents\Visual Studio 2015\Projects\ConwaysGameOfLife\x64\Release\ConwaysGameOfLife.exe
+source\main.cpp(18): error C2664: 'Game::Game(const Game &)': cannot convert argument 4 from 'const char *' to 'char *'
+  source\main.cpp(18): note: Conversion loses qualifiers

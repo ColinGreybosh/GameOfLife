@@ -4,8 +4,8 @@
 
 int main(int argc, char* args[])
 {
-    const char* configFileName = "config.ini";
-    const char* configRegex = "/([A-Z])\\w+([=])+([0-9]{0,})\\d/";
+    const char* CONFIG_FILE_NAME = "config.ini";
+    const char* CONFIG_REGEX = "/([A-Z])\\w+([=])+([0-9]{0,})\\d/";
 
     // Configuration Settings //
     const int WORLD_WIDTH   = 360;
@@ -15,7 +15,7 @@ int main(int argc, char* args[])
     const double IS_ALIVE_CHANCE = 0.5; // Percentage chance that a specific cell will be alive at world generation if RANDOM is the arg in CellVector.generateseed()  
     const char* GAME_TITLE = "Conway's Game of Life";
 
-    Game game(WORLD_WIDTH, WORLD_HEIGHT, WINDOW_SCALE, GAME_TITLE, configFileName, configRegex);
+    Game game(WORLD_WIDTH, WORLD_HEIGHT, WINDOW_SCALE, GAME_TITLE, CONFIG_FILE_NAME, CONFIG_REGEX);
     game.generateSeed(IS_ALIVE_CHANCE);
 
     bool running = true;
