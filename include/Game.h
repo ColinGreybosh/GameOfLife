@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    Game(int width, int height, double windowScale, const char* gameTitle);
+    Game(int width, int height, double windowScale, char* gameTitle, char* configFileName, char* configRegex);
 
     // Generates the starting conditions for the cell vector based on the chosen seed
     void generateSeed(Seed seed);

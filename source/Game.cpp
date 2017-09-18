@@ -3,8 +3,8 @@
 #include "../include/CellVector.h"
 #include "../include/Window.h"
 
-Game::Game(int worldWidth, int worldHeight, double windowScale, const char* gameTitle) 
-    : config("config.ini", "/([A-Z])\\w+([=])+([0-9]{0,})\\d/"),
+Game::Game(int worldWidth, int worldHeight, double windowScale, char* gameTitle, char* configFileName, char* configRegex) 
+    : config(configFileName, configRegex),
       cellVector(worldWidth, worldHeight), 
       window(worldWidth, worldHeight, windowScale, gameTitle){}
 
