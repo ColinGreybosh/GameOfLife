@@ -7,7 +7,7 @@
 class Window
 {
 public:
-    Window(int worldHeight, int worldWidth, double windowScale, const char* gameTitle);
+    Window(int worldWidth, int worldHeight, double windowScale, const char* gameTitle);
     ~Window();
     
     bool wasEventTriggered(SDL_EventType eventType);

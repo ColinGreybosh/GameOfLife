@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    Game(const int worldWidth, int worldHeight, double windowScale, char* gameTitle, char* configFileName, char* configRegex);
+    Game(Config& config, const char* gameTitle);
 
     // Generates the starting conditions for the cell vector based on the chosen seed
     void generateSeed(Seed seed);
@@ -26,7 +26,6 @@ public:
     void delay(Uint32 msDelay);
 
 private:
-    Config config;
     CellVector cellVector;
     Window window;
 };

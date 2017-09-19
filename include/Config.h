@@ -6,22 +6,18 @@
 #include <map>
 #include <regex>
 
-struct mapDataTypes
-{
-    int i;
-    double d;
-    std::string str;
-};
-
 class Config
 {
 public:
     Config(const std::string fileName, const std::string regex);
     ~Config();
 
+    // Returns a string containing the Regular Expression used to parse the config file
     std::string getRegex();
+    // Returns a string containing the relative name of the config file
     std::string getFileName();
-    mapDataTypes getConfigValue(std::string key);
+    // Returns a string value related to the passed argument string key
+    std::string getConfigValue(std::string key);
 
 private:
     std::string fileName;
@@ -29,9 +25,8 @@ private:
 
     std::string regexString;
     std::regex configRegex;
-    std::smatch regexMatch;
 
-    std::map<std::string, mapDataTypes> configOptions;
+    std::map<std::string, std::string> configOptions;
 };
 
 #endif // !CONFIG_H

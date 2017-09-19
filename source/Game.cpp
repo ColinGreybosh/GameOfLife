@@ -3,10 +3,16 @@
 #include "../include/CellVector.h"
 #include "../include/Window.h"
 
-Game::Game(const int worldWidth, int worldHeight, double windowScale, char* gameTitle, char* configFileName, char* configRegex) 
-    : config(configFileName, configRegex),
-      cellVector(worldWidth, worldHeight), 
-      window(worldWidth, worldHeight, windowScale, gameTitle){}
+Game::Game(Config& config, const char* gameTitle) :
+    cellVector(
+        std::stoi(config.getConfigValue("WORLD_WIDTH")), 
+        std::stoi(config.getConfigValue("WORLD_HEIGHT"))),
+    window(
+        std::stoi(config.getConfigValue("WORLD_WIDTH")), 
+        std::stoi(config.getConfigValue("WORLD_HEIGHT")), 
+        std::stof(config.getConfigValue("WINDOW_SCALE")), 
+        gameTitle)
+{}
 
 void Game::generateSeed(Seed seed)
 {
