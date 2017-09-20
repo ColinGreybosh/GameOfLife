@@ -22,11 +22,11 @@ public:
 private:
     std::string fileName;
     std::ifstream configFile;
-
     std::string regexString;
     std::regex configRegex;
-
     std::map<std::string, std::string> configOptions;
+
+    void initWithDefault();
 };
 
 #endif // !CONFIG_H

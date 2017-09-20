@@ -5,10 +5,9 @@
 
 int main(int argc, char* args[])
 {
-    const char* GAME_TITLE = "Conway's Game of Life";
-
     const char* CONFIG_FILE_NAME = "config.ini";
     const char* CONFIG_REGEX = "(.*?)\\s=\\s*(.*)";
+    const char* GAME_TITLE = "Conway's Game of Life";
 
     Config config(CONFIG_FILE_NAME, CONFIG_REGEX);
     

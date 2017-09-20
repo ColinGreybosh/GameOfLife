@@ -38,12 +38,7 @@ Config::Config(const std::string fileName, const std::string regex) :
                 "Configuration Error",
                 "Could not read all config file settings! Using default settings...",
                 NULL);
-
-            configOptions["WORLD_WIDTH"] = "200";
-            configOptions["WORLD_HEIGHT"] = "200";
-            configOptions["PREFERRED_FPS"] = "60";
-            configOptions["WINDOW_SCALE"] = "3.0";
-            configOptions["IS_ALIVE_CHANCE"] = "0.5";
+            initWithDefault();
         }
     }
     else
@@ -53,12 +48,7 @@ Config::Config(const std::string fileName, const std::string regex) :
             "Configuration Error",
             "Could not open configuration file! Using default settings...",
             NULL);
-
-        configOptions["WORLD_WIDTH"] = "200";
-        configOptions["WORLD_HEIGHT"] = "200";
-        configOptions["PREFERRED_FPS"] = "60";
-        configOptions["WINDOW_SCALE"] = "3.0";
-        configOptions["IS_ALIVE_CHANCE"] = "0.5";
+        initWithDefault();
     }
 }
 
@@ -81,4 +71,13 @@ std::string Config::getConfigValue(std::string key)
 {
     // TODO: Fix the string returns
     return configOptions.find(key)->second;
+}
+
+void Config::initWithDefault()
+{
+    configOptions["WORLD_WIDTH"] = "200";
+    configOptions["WORLD_HEIGHT"] = "200";
+    configOptions["PREFERRED_FPS"] = "60";
+    configOptions["WINDOW_SCALE"] = "3.0";
+    configOptions["IS_ALIVE_CHANCE"] = "0.5";
 }
