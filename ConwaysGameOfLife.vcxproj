@@ -31,6 +31,9 @@
     <ClCompile Include="source\main.cpp" />
     <ClCompile Include="source\Window.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config.ini" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FC6AA9B7-DC20-452B-9A1A-93D6F5E6911D}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -158,7 +161,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
