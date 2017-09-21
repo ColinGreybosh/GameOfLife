@@ -9,7 +9,7 @@
 class Config
 {
 public:
-    Config(const std::string fileName, const std::string regex);
+    Config(const std::string fileName, const std::string regex, const std::map<std::string, std::string> configOptionsDefault);
     ~Config();
 
     // Returns a string containing the Regular Expression used to parse the config file
@@ -25,8 +25,12 @@ private:
     std::string regexString;
     std::regex configRegex;
     std::map<std::string, std::string> configOptions;
+    std::map<std::string, std::string> configOptionsDefault;
+
+    bool configKeysAreVerified();
 
     void initWithDefault();
+    void handleConfigReadError();
 };
 
 #endif // !CONFIG_H
