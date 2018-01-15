@@ -24,7 +24,7 @@ public:
     // Returns a string value related to the passed argument string key
     template <typename T>
     inline typename std::enable_if<std::is_same<T, int>::value, int>::type
-        getConfigValue(const std::string key)
+    getConfigValue(const std::string key)
     {
         return std::stoi(configOptions.find(key)->second);
     }
@@ -32,7 +32,7 @@ public:
     // Returns a string value related to the passed argument string key
     template <typename T>
     inline typename std::enable_if<std::is_same<T, double>::value, double>::type
-        getConfigValue(const std::string key)
+    getConfigValue(const std::string key)
     {
         return std::stof(configOptions.find(key)->second);
     }
