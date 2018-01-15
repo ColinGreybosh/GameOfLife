@@ -62,20 +62,6 @@ std::string Config::getFileName()
     return fileName;
 }
 
-template <typename T>
-inline typename std::enable_if< std::is_same<T, int>::value, int >::type
-getConfigValue(const std::string key)
-{
-    return std::stoi(configOptions.find(key)->second);
-}
-
-template <typename T>
-inline typename std::enable_if<std::is_same<T, double>::value, double>::type
-getConfigValue(const std::string key)
-{
-    return std::stof(configOptions.find(key)->second);
-}
-
 bool Config::configKeysAreVerified()
 {
     if (configOptions.size() != configOptionsDefault.size())
