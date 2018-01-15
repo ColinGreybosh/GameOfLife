@@ -122,7 +122,6 @@ public:
     void tick();
     int getVectorWidth();
     int getVectorHeight();
-    // Returns the cell vector
     std::vector<std::vector<bool>> getCellVector();
 
 private:
@@ -130,9 +129,11 @@ private:
     int height;
     std::vector<std::vector<bool>> cellVector;
 
-    // Returns a pseudo-random boolean to determine if a current cell is alive or dead when the seed is generated
+    // Returns a pseudo-random boolean to determine if a current cell is alive or 
+    // dead when the seed is generated
     bool getRandomIsAliveBool(double isAliveChance); 
-    // Returns an integer counting the amount of alive cells adjacent to the given coordinate
+    // Returns an integer counting the amount of alive cells adjacent to the given 
+    // coordinate
     int getAmountOfNeighbors(int x, int y);
 };
 

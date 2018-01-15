@@ -8,12 +8,14 @@ CellVector::CellVector(int width, int height)
 {
     this->width = width;
     this->height = height;
-    cellVector.resize(getVectorWidth(), std::vector<bool>(getVectorHeight(), 0));
+    cellVector.resize(getVectorWidth(), 
+                      std::vector<bool>(getVectorHeight(), 0));
 }
 
 void CellVector::generateSeed(Seed seed)
 {
-    // This switch generates either a random seed or a predefined still-life, oscillator, or space-ship pattern
+    // This switch generates a predefined still-life, 
+    // oscillator, or space-ship pattern
     switch (seed)
     {
     case BLOCK:
@@ -127,7 +129,9 @@ void CellVector::tick()
         for (int y = 0; y < height; y++)
         {
             int amountOfNeighbors = getAmountOfNeighbors(x, y);
-            // Alive and has 2 neighbors - Cell Lives | Has 3 neighbors - Cell Lives/Is Born | Neither previous conditions satisfied - Cell Dies
+            // Alive and has 2 neighbors - Cell Lives
+            // Has 3 neighbors - Cell Lives/Is Born
+            //Neither previous conditions satisfied - Cell Dies
             vectorCopy[x][y] = cellVector[x][y] && amountOfNeighbors == 2 || amountOfNeighbors == 3;
         }
     }
@@ -141,16 +145,18 @@ int CellVector::getAmountOfNeighbors(int x, int y)
 
     for (int i = -1; i <= 1; i++)
     {
-        int currentCol = x + i;
+        int currentCol = ((x + i + getVectorWidth()) % getVectorWidth());
         for (int j = -1; j <= 1; j++)
         {
-            int currentRow = y + j;
-            bool outOfBounds = ((currentCol < 0) || (currentCol >= width) || (currentRow < 0) || (currentRow >= height));
+            int currentRow = ((y + j + getVectorHeight()) % getVectorHeight());
+            /*bool outOfBounds = ((currentCol < 0) || (currentCol >= width) || (currentRow < 0) || (currentRow >= height));
 
             if (!outOfBounds && cellVector[currentCol][currentRow])
             {
                 neighborCount++;
-            }
+            }*/
+
+            neighborCount += cellVector[currentCol][currentRow];
         }
     }
 

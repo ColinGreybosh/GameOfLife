@@ -19,7 +19,7 @@ int main(int argc, char* args[])
     Config config(CONFIG_FILE_NAME, CONFIG_REGEX, defaultConfig);
     
     Game game(config, GAME_TITLE);
-    game.generateSeed(std::stof(config.getConfigValue("IS_ALIVE_CHANCE")));
+    game.generateSeed(config.getConfigValue<double>("IS_ALIVE_CHANCE"));
 
     bool running = true;
     while (running)

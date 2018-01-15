@@ -6,8 +6,12 @@
 
 #include "../include/Config.h"
 
-Config::Config(const std::string fileName, const std::string regex, const std::map<std::string, std::string> configOptionsDefault) :
-    configRegex(regex)
+Config::Config(
+    const std::string fileName, 
+    const std::string regex, 
+    const std::map<std::string, 
+    std::string> configOptionsDefault) :
+        configRegex(regex)
 {
     this->fileName = fileName;
     this->configOptionsDefault = configOptionsDefault;
@@ -58,10 +62,18 @@ std::string Config::getFileName()
     return fileName;
 }
 
-std::string Config::getConfigValue(std::string key)
+template <typename T>
+inline typename std::enable_if< std::is_same<T, int>::value, int >::type
+getConfigValue(const std::string key)
 {
-    // TODO: Fix the string returns
-    return configOptions.find(key)->second;
+    return std::stoi(configOptions.find(key)->second);
+}
+
+template <typename T>
+inline typename std::enable_if<std::is_same<T, double>::value, double>::type
+getConfigValue(const std::string key)
+{
+    return std::stof(configOptions.find(key)->second);
 }
 
 bool Config::configKeysAreVerified()

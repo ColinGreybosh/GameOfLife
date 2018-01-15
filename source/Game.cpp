@@ -5,12 +5,12 @@
 
 Game::Game(Config& config, const char* gameTitle) :
     cellVector(
-        std::stoi(config.getConfigValue("WORLD_WIDTH")), 
-        std::stoi(config.getConfigValue("WORLD_HEIGHT"))),
+        config.getConfigValue<int>("WORLD_WIDTH"), 
+        config.getConfigValue<int>("WORLD_HEIGHT")),
     window(
-        std::stoi(config.getConfigValue("WORLD_WIDTH")), 
-        std::stoi(config.getConfigValue("WORLD_HEIGHT")), 
-        std::stof(config.getConfigValue("WINDOW_SCALE")), 
+        config.getConfigValue<int>("WORLD_WIDTH"), 
+        config.getConfigValue<int>("WORLD_HEIGHT"), 
+        config.getConfigValue<double>("WINDOW_SCALE"), 
         gameTitle)
 {}
 

@@ -5,19 +5,29 @@
 #include <fstream>
 #include <map>
 #include <regex>
+#include <type_traits>
 
 class Config
 {
 public:
-    Config(const std::string fileName, const std::string regex, const std::map<std::string, std::string> configOptionsDefault);
+    Config(const std::string fileName, 
+           const std::string regex, 
+           const std::map<std::string, std::string> configOptionsDefault);
     ~Config();
 
     // Returns a string containing the Regular Expression used to parse the config file
     std::string getRegex();
+
     // Returns a string containing the relative name of the config file
     std::string getFileName();
+
     // Returns a string value related to the passed argument string key
-    std::string getConfigValue(std::string key);
+    template <typename T>
+    inline typename std::enable_if<std::is_same<T, int>::value, int>::type
+    getConfigValue(const std::string key);
+    template <typename T>
+    inline typename std::enable_if<std::is_same<T, double>::value, double>::type
+    getConfigValue(const std::string key);
 
 private:
     std::string fileName;

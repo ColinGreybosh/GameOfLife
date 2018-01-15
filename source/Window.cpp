@@ -5,7 +5,11 @@
 #include "../include/Window.h"
 
 
-Window::Window(int worldWidth, int worldHeight, double windowScale, const char* gameTitle)
+Window::Window(
+    int worldWidth, 
+    int worldHeight, 
+    double windowScale, 
+    const char* gameTitle)
 {
     this->gameTitle = gameTitle;
     this->worldWidth = windowWidth = worldWidth;
