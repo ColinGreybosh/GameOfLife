@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include <iostream>
+#include <chrono>
 
 #include "../include/Game.h"
 
@@ -22,12 +23,31 @@ int main(int argc, char* args[])
     game.generateSeed(config.getConfigValue<double>("IS_ALIVE_CHANCE"));
 
     bool running = true;
+
+    auto t1 = std::chrono::high_resolution_clock::now();
+
     while (running)
     {
         running = !game.wasEventTriggered(SDL_QUIT);
+
         game.render();
         game.tick();
-        game.delay(static_cast<Uint32>(16));
+
+        auto t2 = std::chrono::high_resolution_clock::now();
+
+        std::chrono::duration<float> deltaFloat = t2 - t1;
+        std::chrono::milliseconds deltaMilli = std::chrono::duration_cast<std::chrono::milliseconds>(deltaFloat);
+
+        int delayMs = static_cast<int>((1000 / (config.getConfigValue<double>("PREFERRED_FPS")) - deltaMilli.count()));
+
+        if (delayMs > 0)
+        {
+            game.delay(static_cast<Uint32>(delayMs));
+        }
+
+        t1 = std::chrono::high_resolution_clock::now();
+
+        //game.delay(16);
     }
 
     return 0;

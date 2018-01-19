@@ -14,7 +14,7 @@ enum Seed
     . 0 0 .
     . . . .
     */
-    BLOCK,
+    BLOCK = 1,
 
     /*
     Still Life, 6x5 region, 6 live cells
@@ -117,6 +117,7 @@ class CellVector
 public:
     CellVector(int width, int height);
 
+    void generateSeed();
     void generateSeed(Seed seed);
     void generateSeed(double isAliveChance);
     void tick();
@@ -127,7 +128,10 @@ public:
 private:
     int width;
     int height;
+    Seed seed;
+    double isAliveChance = NAN;
     std::vector<std::vector<bool>> cellVector;
+    std::vector<std::vector<bool>> prevCellVector;
 
     // Returns a pseudo-random boolean to determine if a current cell is alive or 
     // dead when the seed is generated

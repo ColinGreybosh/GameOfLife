@@ -12,8 +12,22 @@ CellVector::CellVector(int width, int height)
                       std::vector<bool>(getVectorHeight(), 0));
 }
 
+void CellVector::generateSeed()
+{
+    if (seed)
+    {
+        generateSeed(seed);
+    }
+    if (isAliveChance != NAN)
+    {
+        generateSeed(isAliveChance);
+    }
+}
+
 void CellVector::generateSeed(Seed seed)
 {
+    this->seed = seed;
+
     // This switch generates a predefined still-life, 
     // oscillator, or space-ship pattern
     switch (seed)
@@ -111,6 +125,8 @@ void CellVector::generateSeed(double isAliveChance)
 {
     srand(static_cast <unsigned> (time(0)));
 
+    this->isAliveChance = isAliveChance;
+
     for (int x = 0; x < width; x++)
     {
         for (int y = 0; y < height; y++)
@@ -137,6 +153,29 @@ void CellVector::tick()
     }
 
     cellVector.swap(vectorCopy);
+    prevCellVector = cellVector;
+}
+
+int CellVector::getVectorWidth()
+{
+    return width;
+}
+
+int CellVector::getVectorHeight()
+{
+    return height;
+}
+
+std::vector<std::vector<bool>> CellVector::getCellVector()
+{
+    return cellVector;
+}
+
+bool CellVector::getRandomIsAliveBool(double isAliveChance)
+{
+    double chance = static_cast <float> (rand() / static_cast <float> (RAND_MAX));
+
+    return (isAliveChance >= chance);
 }
 
 int CellVector::getAmountOfNeighbors(int x, int y)
@@ -160,26 +199,4 @@ int CellVector::getAmountOfNeighbors(int x, int y)
     }
 
     return neighborCount;
-}
-
-int CellVector::getVectorWidth()
-{
-    return width;
-}
-
-int CellVector::getVectorHeight()
-{
-    return height;
-}
-
-std::vector<std::vector<bool>> CellVector::getCellVector()
-{
-    return cellVector;
-}
-
-bool CellVector::getRandomIsAliveBool(double isAliveChance)
-{
-    double chance = static_cast <float> (rand() / static_cast <float> (RAND_MAX));
-
-    return (isAliveChance >= chance);
 }
